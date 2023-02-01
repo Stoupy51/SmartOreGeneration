@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.0/slots/apply_random
+#> smart_ore_generation:v1.0/slots/random_position/apply_random
 #
 # @input :
 #	- #min_height : min value for Y Pos
@@ -36,8 +36,7 @@ execute store result entity @s Pos[0] double 0.1 run scoreboard players get #new
 execute store result entity @s Pos[2] double 0.1 run scoreboard players get #new_z smart_ore_generation.data
 
 # Apply Y offset
-execute store result score #new_y smart_ore_generation.data run data get entity @s Pos[1] 10
+scoreboard players operation #new_y smart_ore_generation.data = #min_height smart_ore_generation.data
 scoreboard players operation #new_y smart_ore_generation.data += #r_y smart_ore_generation.data
-scoreboard players operation #new_y smart_ore_generation.data += #min_height smart_ore_generation.data
 execute store result entity @s Pos[1] double 0.1 run scoreboard players get #new_y smart_ore_generation.data
 
