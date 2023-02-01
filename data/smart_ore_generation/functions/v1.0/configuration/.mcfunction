@@ -1,6 +1,6 @@
 
 ## Defines for Datapack Helper Plus
-#define score_holder _REGION_SIZE   Size of the region to generate in
+#define score_holder _REGION_SIZE   Size of the region to generate in (Should be a multiple of 16)
 #define score_holder _HASH_MAX      Max value of the hash for the Hash Table
 #define score_holder _RANDOM_PRIME  Prime number to use for the random number generator
 #define score_holder _NEXT_RANDOM   Next random number to pick 
@@ -20,6 +20,11 @@ execute if score _NEXT_RANDOM smart_ore_generation.data matches 0 run function s
 
 ## Define / Create the hash table
 function smart_ore_generation:v1.0/configuration/hash_table
+
+
+## Forceload a region in overworld for a marker
+execute in minecraft:overworld run forceload add 0 0
+schedule function smart_ore_generation:v1.0/configuration/forceload_marker 5s
 
 
 # Make this function non-executed on load
