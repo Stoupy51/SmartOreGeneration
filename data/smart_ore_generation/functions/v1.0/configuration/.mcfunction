@@ -7,7 +7,8 @@
 
 
 ## Define constants
-scoreboard players set _REGION_SIZE smart_ore_generation.data 48
+scoreboard players set _PRIVATE_REGION_SIZE smart_ore_generation.data 96
+scoreboard players operation _REGION_SIZE smart_ore_generation.data = _PRIVATE_REGION_SIZE smart_ore_generation.data
 scoreboard players set _HASH_MAX smart_ore_generation.data 128
 
 
