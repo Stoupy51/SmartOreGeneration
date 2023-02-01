@@ -4,7 +4,7 @@ setblock ~ 0 ~ barrier
 
 
 # Call public function tag
-execute at @s run function #smart_ore_generation:v1/generate_ores
+execute at @s run function #smart_ore_generation:v1/signals/generate_ores
 
 
 # Reset all scoreboard values

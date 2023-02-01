@@ -3,7 +3,7 @@
 	function smart_ore_generation:v1.0/technical/generate/correct_position
 
 #Call function tag
-	execute at @s run function #smart_ore_generation:v1/generate_ores
+	execute at @s run function #smart_ore_generation:v1/signals/generate_ores
 
 scoreboard players reset #x.random smart_ore_generation.data
 scoreboard players reset #z.random smart_ore_generation.data

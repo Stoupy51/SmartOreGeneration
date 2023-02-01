@@ -1,9 +1,9 @@
 
-#> smart_ore_generation:v1.0/event/denied_dimensions
+#> smart_ore_generation:v1.0/signals/denied_dimensions
 #
-# @within #smart_ore_generation:v1/denied_dimensions
-# @executed as and at the player who triggered the event
-# @input score #authorized smart_ore_generation.data equals to 1 or 0 if another datapack has already denied generation
+# @within			#smart_ore_generation:v1/signals/denied_dimensions
+# @executed			as and at the player who triggered the event
+# @input score		#authorized smart_ore_generation.data equals to 1 or 0 if another datapack has already denied generation
 #
 ## WARNING!
 # - You must check the #authorized score matching 1 before executing any commands to prevent reenable generation in a dimension that is disabled by another datapack.
