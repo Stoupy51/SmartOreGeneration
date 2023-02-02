@@ -25,4 +25,5 @@ execute if predicate smart_ore_generation:v1/chance/0.5 run scoreboard players a
 execute if predicate smart_ore_generation:v1/chance/0.5 run scoreboard players add _NEXT_RANDOM smart_ore_generation.data 4194304
 execute if predicate smart_ore_generation:v1/chance/0.5 run scoreboard players add _NEXT_RANDOM smart_ore_generation.data 8388608
 execute if predicate smart_ore_generation:v1/chance/0.5 run scoreboard players add _NEXT_RANDOM smart_ore_generation.data 16777216
+execute if score _NEXT_RANDOM smart_ore_generation.data matches 0 run scoreboard players set _NEXT_RANDOM smart_ore_generation.data 7
 
