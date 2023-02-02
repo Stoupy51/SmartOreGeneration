@@ -13,6 +13,6 @@
 # execute if score #authorized smart_ore_generation.data matches 1 if predicate simplenergy:in_dim/overworld run scoreboard players set #authorized smart_ore_generation.data 0
 
 ## Another example:
-# execute if score #authorized smart_ore_generation.data matches 1 if entity @s[nbt={Dimension:"minecraft:overworld"}] run scoreboard players set #authorized smart_ore_generation.data 0
+# execute if score #authorized smart_ore_generation.data matches 1 if dimension minecraft:overworld run scoreboard players set #authorized smart_ore_generation.data 0
 
 

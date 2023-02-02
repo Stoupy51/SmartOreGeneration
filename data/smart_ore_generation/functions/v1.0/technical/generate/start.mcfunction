@@ -1,4 +1,7 @@
 
+# Debug level
+execute if score _DEBUG_LEVEL smart_ore_generation.data matches 1.. run say §6[Smart Ore Generation] §eGenerating new Region!
+
 # Place a barrier block to remember the loaded region
 setblock ~ 0 ~ barrier
 
@@ -17,4 +20,10 @@ scoreboard players reset #random smart_ore_generation.data
 scoreboard players reset #min_height smart_ore_generation.data
 scoreboard players reset #max_height smart_ore_generation.data
 scoreboard players reset #max_attempts smart_ore_generation.data
+
+# Indicate that a new region has been generated
+scoreboard players set #generated smart_ore_generation.data 1
+
+# Debug level
+execute if score _DEBUG_LEVEL smart_ore_generation.data matches 1.. run say §6[Smart Ore Generation] §eDone generating ores!
 

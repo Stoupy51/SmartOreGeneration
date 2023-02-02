@@ -8,5 +8,7 @@ execute unless score #configured smart_ore_generation.data matches 1 run functio
 
 #define storage smart_ore_generation:main
 
-schedule function smart_ore_generation:v1.0/loop 2s replace
+# Main loop
+execute if score _IS_ENABLED smart_ore_generation.data matches 1 if score _DEBUG_LEVEL smart_ore_generation.data matches 1.. run say §6[Smart Ore Generation] §eLoaded
+execute if score _IS_ENABLED smart_ore_generation.data matches 1 run schedule function smart_ore_generation:v1.0/loop 2s replace
 
