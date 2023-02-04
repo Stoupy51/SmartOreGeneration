@@ -1,74 +1,148 @@
+
 ### Translations
 * [English](https://github.com/Stoupy51/SmartOreGeneration/blob/main/README.md)
 * [Française](https://github.com/Stoupy51/SmartOreGeneration/blob/main/README.fr.md)
 
 
 # 📖 Smart Ore Generation
-A Minecraft data pack library for handling custom durability on every damageable item (vanilla, custom, and modded items).
-* This custom durability is done by simulating a kind of unbreaking enchantment on the item.
-* For example, if you have an item with a durability of 100, and you apply a durability multiplier of 2.0, the item will have 50% chance to really lose durability. So you will use this item 2x as if it had 200 durability.
-* This library provide you a totally configurable multiplier for every specific item depending on its id and its nbt tag.
-* This system is compatible with unbreaking and mending enchantments.
+A Minecraft data pack library for handling custom ore generation by using a smart system for ore location.
+* This library is an addition to the vanilla ore generation system. It does not replace it.
+* It has been designed to be compatible with other ore generation libraries.
+* This library only provide a way to generate ores in a smart way, it does not provide custom block functions.
+* You can configure the library to generate ores in a specific dimension, or in all dimensions.
+* It is working with custom overworld minimum height, a constant score is calculated for overworld only if needed.
+* This library supports customs dimensions, but you must add them to the `denied_dimensions` function tag to prevent them from being scanned if you don't want them to be scanned.
+* The library will be working even if the world was generated before installing the library because it does not depend on world generation.
 
 This is an embedded library, so you package it inside your datapack as opposed to having a separate download. Requires [LanternLoad](https://github.com/LanternMC/load) to operate.
 
+<br>
 
-## Differences between this library and Smithed Custom Durability
-* This library is not a replacement for Smithed Custom Durability, it can be used together.
-* You can directly repair items in an anvil.
-* You don't have to add special nbt to your items.
-* You can use this library with any item that can lose durability, including items from mods.
-* We do not use a custom lore for the item to show the custom durability.
-* If you item lose multiple durability at once, the value it divided by the multiplier.
+# 📚 System explanation
+Every 2 seconds, the library run at the location of every player the following steps:
+* Run a the function tag `denied_dimensions` to allow you to deny some dimensions from being scanned.
+* If the dimension is allowed, 8 regions around players are scanned. (Default region size is 96x96)
+* For each region, the library will check if is has already been scanned. If not, it will launch ore generation for this region.
+* Then, the function tag `generate_ores` is called at the origin of the region (0, 0, 0).
+* You can add your own ore generation function to this tag where you will be generating your ores depending on self-chosen conditions. (like dimensions, biomes, etc...)
+* For every patch of ore you generate, you must use the random position function tag `random_position` to get a random position inside the region. This function tag will move the position to a random position and the nearest air block. Doing this way will prevent ores from being generated inside blocks and never be found by players (Adding lag to the server if the ore use an entity). So ores will be easier to find.
+* And after every check, the library will save the region as "scanned" to prevent it from being scanned again by adding a `barrier block` at the origin of the region.
+* Finally, the function tag `post_generation` is called to allow you to do some post-generation tasks like running a function to all your newly generated ores to add some nbt tags to them or something else.
 
+<br>
 
-
-## Function Tag
-Function tag is called by the library to inform you an event has happened, and to allow you to make changes to the event.
-* To use this call, you must add a function to the tag list located in `data/smart_ore_generation/tags/functions/v1/durability_changed.json`.
-* Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signal_received_template.mcfunction).
+# 🔧 Function Tag
+## 📥 <ins>Signals</ins>
+### `#smart_ore_generation:v1/denied_dimensions`
+* This function tag is called when the library want to scan a region. You can add which dimension you want to deny from being scanned by adding a function to this tag.
+* To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/functions/v1/signals/denied_dimensions.json`.
+* Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/denied_dimensions.mcfunction).
 ```mcfunction
-##Should be called by function tag #smart_ore_generation:v1/durability_changed
-##Set the durability multiplier compared to vanilla durability
-##Keep in mind that your multiplier should be >= 1000, or else there is no effect.
-##E.g. if you want to multiply durability by a x4.5 factor
-##You'll need to put #multiplier score to 4500 (4500 divided by 1000 = 4.5)
+#> smart_ore_generation:v1.0/signals/denied_dimensions
+#
+# @within			#smart_ore_generation:v1/signals/denied_dimensions
+# @executed			as & at the player who triggered the event
+# @input score		#authorized smart_ore_generation.data equals to 1 or 0 if another datapack has already denied generation
+#
+## WARNING!
+# - You must check the #authorized score matching 1 before executing any commands to prevent reenable generation in a dimension that is disabled by another datapack.
+# - Putting the #authorized score to 0 will disable generation in the dimension for every datapack.
 
-#Example taken from SimplEnergy data pack
-#Custom durability for Simplunium Armor & Tools (x7 leather armor & x1.2 diamond tools)
-#Offhand durability here is useless because no diamond tools can be used in offhand
-	scoreboard players set #multiplier smart_ore_generation.data 7000
-	execute if score #head_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main head{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/head
-	execute if score #chest_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main chest{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/chest
-	execute if score #legs_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main legs{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/legs
-	execute if score #feet_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main feet{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/feet
-	scoreboard players set #multiplier smart_ore_generation.data 1200
-	execute if score #mainhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main mainhand{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/mainhand
-	#execute if score #offhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main offhand{tag:{simplenergy:{simplunium:1b}}} run function #smart_ore_generation:event/offhand
+## Here is an example to disable generation in a dimension:
+execute if score #authorized smart_ore_generation.data matches 1 if predicate simplenergy:in_overworld run scoreboard players set #authorized smart_ore_generation.data 0
 
-#Example that multiply every elytra durability on the server by 2
-	scoreboard players set #multiplier smart_ore_generation.data 2000
-	execute if score #chest_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main chest{id:"minecraft:elytra"} run function #smart_ore_generation:event/chest
-	##If a multiplier has been applied on a slot, you can't run it again on the same slot so this command will never run.
-	execute if score #chest_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main chest{id:"minecraft:elytra",tag:{custom_elytra:1b}} run function #smart_ore_generation:event/chest
+## Another example:
+execute if score #authorized smart_ore_generation.data matches 1 if dimension minecraft:overworld run scoreboard players set #authorized smart_ore_generation.data 0
+```
+### `#smart_ore_generation:v1/generate_ores`
+* This function tag is called when the library want to generate ores in a region. You can add your own ore generation function to this tag.
+* To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/functions/v1/signals/generate_ores.json`.
+* Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/generate_ores.mcfunction)
+```mcfunction
+#> smart_ore_generation:v1.0/signals/generate_ores
+#
+# @within			#smart_ore_generation:v1/signals/generate_ores
+# @executed			as a special marker & at a position you shouldn't care about
+#
+## WARNING!
+# - You must not use /kill @s in this file, or the entire library will stop working.
+# - Don't forget to edit #min_height and #max_height scores before trying to generate ores.
+#
+# @example from SimplEnergy datapack
+# This example generates 4 patches of Simplunium Ore in the overworld only
+# Per region and between world bottom (minecraft default: -64) and y=40
 
-#Example with some fishing rod and shield (x3.14) and different syntaxes
-	scoreboard players set #multiplier smart_ore_generation.data 3140
-	execute if score #mainhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main mainhand{tag:{ctc:{id:"diamond_fishing_rod",from:"a_certain_pack"}}} run function #smart_ore_generation:event/mainhand
-	execute if score #offhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main offhand.tag.ctc{id:"diamond_fishing_rod",from:"a_certain_pack"} run function #smart_ore_generation:event/offhand
-	execute if score #mainhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main mainhand.tag.some_private_nbt.diamond_shield run function #smart_ore_generation:event/mainhand
-	execute if score #offhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main offhand.tag.some_private_nbt{diamond_shield:1b} run function #smart_ore_generation:event/offhand
+# Dimension score, 0 = overworld
+scoreboard players set #dimension smart_ore_generation.data -1
+execute if predicate simplenergy:in_overworld run scoreboard players set #dimension smart_ore_generation.data 0
 
-#Example for every item having lore "Almost Unbreakable" with different syntaxes
-	scoreboard players set #multiplier smart_ore_generation.data 2147483647
-	execute if score #head_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main head.tag.display{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']} run function #smart_ore_generation:event/head
-	execute if score #chest_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main chest.tag{display:{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']}} run function #smart_ore_generation:event/chest
-	execute if score #legs_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main legs{tag:{display:{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']}}} run function #smart_ore_generation:event/legs
-	execute if score #feet_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main feet{tag:{display:{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']}}} run function #smart_ore_generation:event/feet
-	execute if score #mainhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main mainhand{tag:{display:{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']}}} run function #smart_ore_generation:event/mainhand
-	execute if score #offhand_valid smart_ore_generation.data matches 1 if data storage smart_ore_generation:main offhand{tag:{display:{Lore:['[{"text":"Almost Unbreakable","italic":false,"color":"red"}]']}}} run function #smart_ore_generation:event/offhand
+# Generate Simplunium Ore (x4) in the overworld only
+scoreboard players operation #min_height smart_ore_generation.data = _OVERWORLD_BOTTOM smart_ore_generation.data
+scoreboard players set #max_height smart_ore_generation.data 40
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.0/signals/example/simplunium_ore
+# See the template in the link for the content of the function smart_ore_generation:v1.0/signals/example/simplunium_ore.mcfunction
+```
+### `#smart_ore_generation:v1/post_generation`
+* This function tag is called when the library has finished generating ores in regions. You can add your own post-generation function to this tag.
+* To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/functions/v1/signals/post_generation.json`.
+* Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/post_generation.mcfunction)
+```mcfunction
+#> smart_ore_generation:v1.0/signals/post_generation
+#
+# @within			#smart_ore_generation:v1/signals/post_generation
+# @executed			as none at none (default of a /schedule)
+#
+# This function is executed once after all the ore generation is done.
+# For example, if 6 regions are generated, this function will be executed 1 time after all the regions are generated.
+# It can be used to do some post-generation tasks, like running a function on all the ores you generated
+# instead of running it on each ore individually when you generate it.
+# Useful for optimisation.
+#
+# @example from SimplEnergy datapack
+# This example will edit entity nbt for simplunium ore and deepslate simplunium ore
+# if they have been generated all along the generation process.
+# This is useful for optimisation because you run the "secondary" function only once
+# instead of running it on each ore individually when you generate it.
+
+# Place simplunium ore if it has been generated
+execute if score #generated_ore simplenergy.data matches 1 as @e[tag=simplenergy.new_simplunium_ore] at @s run function simplenergy:place/simplunium_ore/secondary
+execute if score #generated_ore simplenergy.data matches 1 run scoreboard players reset #generated_ore simplenergy.data
+
+# Place deepslate simplunium ore if it has been generated
+execute if score #generated_deepslate_ore simplenergy.data matches 1 as @e[tag=simplenergy.new_deepslate_simplunium_ore] at @s run function simplenergy:place/deepslate_simplunium_ore/secondary
+execute if score #generated_deepslate_ore simplenergy.data matches 1 run scoreboard players reset #generated_deepslate_ore simplenergy.data
+```
+## 📤 <ins>Slots</ins>
+### `#smart_ore_generation:v1/slots/random_position`
+* This function tag should be called when you need a random position in the region.
+* To use properly this slot, see the template [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/simplunium_ore.mcfunction)
+```mcfunction
+#> smart_ore_generation:v1.0/signals/example/simplunium_ore
+#
+# @example from SimplEnergy datapack
+# Always launch the random position function tag before anything else
+# @TIP: The random position is not flat, is has a digit.
+# You can use the digit to generate ore on a specific way like below
+# It will try to place the ore patch depending on the digit
+# so on every line below, somes can fail making it more realistic
+# resulting in an ore patch containing between 2 and 6 ores (in this example)
+
+## Try to find a random position adjacent to air in the region to generate the ore
+function #smart_ore_generation:v1/slots/random_position
+
+# Placing Simplunium Ore Patch
+execute at @s if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
+execute at @s positioned ~0.8 ~0.8 ~0.8 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
+execute at @s positioned ~0.0 ~0.8 ~0.8 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
+execute at @s positioned ~0.8 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
+execute at @s positioned ~0.8 ~0.0 ~0.8 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
+execute at @s positioned ~0.0 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
 ```
 
+<br>
 
 ## How to use
 1. Use a datapack merger: [Mitochrondria Online](https://mito.thenuclearnexus.live/)

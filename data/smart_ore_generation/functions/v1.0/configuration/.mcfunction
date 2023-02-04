@@ -2,7 +2,7 @@
 ## Defines for Datapack Helper Plus
 #define score_holder _IS_ENABLED 			Whether the datapack is enabled or not
 #define score_holder _DEBUG_LEVEL 			(0 = None, 1 = Launch of main functions, 2 = 1 + Random generated positions)
-#define score_holder _PRIVATE_REGION_SIZE 	Default size of the region to generate in (Should be a multiple of 16)
+#define score_holder _PRIVATE_REGION_SIZE 	[DO NOT MODIFY] Default size of the region to generate in (Should be a multiple of 16)
 #define score_holder _REGION_SIZE 			Current size of the region to generate in (Should be a multiple of 16)
 #define score_holder _REGION_SIZE_10 		Size of the region multiplied by 10
 #define score_holder _RANDOM_PRIME 			Prime number to use for the random number generator
