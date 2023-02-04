@@ -36,7 +36,7 @@ Toutes les 2 secondes, la librairie exécute à l'emplacement de chaque joueur l
 ### `#smart_ore_generation:v1/denied_dimensions`
 * Ce function tag est appelé lorsque la librairie veut scanner une région. Vous pouvez ajouter quelles dimensions que vous voulez empêcher d'être scannées en ajoutant une fonction à ce tag.
 * Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/functions/v1/signals/denied_dimensions.json`.
-* Reportez-vous à ce modèle pour le contenu de la fonction [ici] (https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/denied_dimensions.mcfunction).
+* Reportez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/denied_dimensions.mcfunction).
 ```mcfunction
 #> smart_ore_generation:v1.0/signals/denied_dimensions
 #
