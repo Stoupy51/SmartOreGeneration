@@ -51,7 +51,7 @@ Toutes les 2 secondes, la librairie exécute à l'emplacement de chaque joueur l
 ## Voici un exemple pour désactiver la génération dans une dimension :
 execute if score #authorized smart_ore_generation.data matches 1 if predicate simplenergy:in_overworld run scoreboard players set #authorized smart_ore_generation.data 0
 
-## Autre exemple:
+## Autre exemple :
 execute if score #authorized smart_ore_generation.data matches 1 if dimension minecraft:overworld run scoreboard players set #authorized smart_ore_generation.data 0
 ```
 ### `#smart_ore_generation:v1/generate_ores`
