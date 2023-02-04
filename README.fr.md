@@ -148,7 +148,9 @@ execute at @s positioned ~0.0 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simpluni
 ## Comment l'utiliser ?
 1. Utilisez un datapack merger : [Mitochrondria Online](https://mito.thenuclearnexus.live/)
 2. Implémentez l'API comme décrit ci-dessus.
+
 OU
+
 1. Installez [LanternLoad](https://github.com/LanternMC/load) dans votre data pack
 2. Copiez le dossier `data/smart_ore_generation` dans votre data pack
 3. Fusionnez le contenu de `SmartOreGeneration/data/load/tags/functions/load.json` et votre `data/load/tags/functions/load.json`
