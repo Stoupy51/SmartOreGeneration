@@ -1,7 +1,7 @@
 {
 	"display": {
 		"title": "Smart Ore Generation",
-		"description": "v1.0",
+		"description": "v1.1",
 		"icon": {
 			"item": "minecraft:emerald_ore"
 		},
