@@ -1,21 +1,13 @@
-[
-	{
+{
+	"condition": "minecraft:inverted",
+	"term": {
 		"condition": "minecraft:location_check",
 		"predicate": {
-			"block": {}
-		}
-	},
-	{
-		"condition": "minecraft:inverted",
-		"term": {
-			"condition": "minecraft:location_check",
-			"predicate": {
-				"block": {
-					"blocks": [
-						"minecraft:barrier"
-					]
-				}
+			"block": {
+				"blocks": [
+					"minecraft:barrier"
+				]
 			}
 		}
 	}
-]
+}
