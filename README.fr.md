@@ -35,10 +35,10 @@ Toutes les 2 secondes, la librairie exécute à l'emplacement de chaque joueur l
 ## 📥 <ins>Signals</ins>
 ### `#smart_ore_generation:v1/denied_dimensions`
 * Ce function tag est appelé lorsque la librairie veut scanner une région. Vous pouvez ajouter quelles dimensions que vous voulez empêcher d'être scannées en ajoutant une fonction à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/functions/v1/signals/denied_dimensions.json`.
-* Reportez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/denied_dimensions.mcfunction).
+* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/denied_dimensions.json`.
+* Reportez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/function/v1.3.0/signals/denied_dimensions.mcfunction).
 ```mcfunction
-#> smart_ore_generation:v1.2/signals/denied_dimensions
+#> smart_ore_generation:v1.3.0/signals/denied_dimensions
 #
 # @within			#smart_ore_generation:v1/signals/denied_dimensions
 # @executed			as & at le joueur qui a déclenché le signal
@@ -56,10 +56,10 @@ execute if score #authorized smart_ore_generation.data matches 1 if dimension mi
 ```
 ### `#smart_ore_generation:v1/generate_ores`
 * Ce function tag est appelé lorsque la librairie veut générer des minerais dans une région. Vous pouvez ajouter votre propre fonction de génération de minerai à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/functions/v1/signals/generate_ores.json`.
-* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/generate_ores.mcfunction)
+* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/generate_ores.json`.
+* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/function/v1.3.0/signals/example/generate_ores.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.2/signals/generate_ores
+#> smart_ore_generation:v1.3.0/signals/generate_ores
 #
 # @within			#smart_ore_generation:v1/signals/generate_ores
 # @executed			as un marker spécial & at une position dont vous ne devriez pas vous soucier
@@ -79,18 +79,18 @@ execute if predicate simplenergy:in_overworld run scoreboard players set #dimens
 # Generate Simplunium Ore (x4) in the overworld only
 scoreboard players operation #min_height smart_ore_generation.data = _OVERWORLD_BOTTOM smart_ore_generation.data
 scoreboard players set #max_height smart_ore_generation.data 40
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.2/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.2/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.2/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.2/signals/example/simplunium_ore
-# Voir le modèle dans le lien pour le contenu de la fonction smart_ore_generation:v1.2/signals/example/simplunium_ore.mcfunction
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
+# Voir le modèle dans le lien pour le contenu de la fonction smart_ore_generation:v1.3.0/signals/example/simplunium_ore.mcfunction
 ```
 ### `#smart_ore_generation:v1/post_generation`
 * Ce function tag est appelé lorsque la librairie a fini de générer des minerais dans les régions. Vous pouvez ajouter votre propre fonction de post-génération à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/functions/v1/signals/post_generation.json`.
-* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/post_generation.mcfunction)
+* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/post_generation.json`.
+* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/function/v1.3.0/signals/example/post_generation.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.2/signals/post_generation
+#> smart_ore_generation:v1.3.0/signals/post_generation
 #
 # @within			#smart_ore_generation:v1/signals/post_generation
 # @executed			as none at none (default of a /schedule)
@@ -118,9 +118,9 @@ execute if score #generated_deepslate_ore simplenergy.data matches 1 run scorebo
 ## 📤 <ins>Slots</ins>
 ### `#smart_ore_generation:v1/slots/random_position`
 * Ce function tag doit être appelé lorsque vous avez besoin d'une position aléatoire dans la région.
-* Pour utiliser correctement ce slot, voir le modèle [ici].(https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/functions/v1.0/signals/example/simplunium_ore.mcfunction)
+* Pour utiliser correctement ce slot, voir le modèle [ici].(https://github.com/Stoupy51/SmartOreGeneration/blob/main/data/smart_ore_generation/function/v1.3.0/signals/example/simplunium_ore.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.2/signals/example/simplunium_ore
+#> smart_ore_generation:v1.3.0/signals/example/simplunium_ore
 #
 # @example from SimplEnergy datapack
 # Exemple de comment trouver une position aléatoire dans une région pour générer un minerai
@@ -153,6 +153,6 @@ OU
 
 1. Installez [LanternLoad](https://github.com/LanternMC/load) dans votre data pack
 2. Copiez le dossier `data/smart_ore_generation` dans votre data pack
-3. Fusionnez le contenu de `SmartOreGeneration/data/load/tags/functions/load.json` et votre `data/load/tags/functions/load.json`
+3. Fusionnez le contenu de `SmartOreGeneration/data/load/tags/function/load.json` et votre `data/load/tags/function/load.json`
 4. Implémentez l'API comme décrit ci-dessus.
 
