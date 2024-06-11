@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.3.0/signals/example/post_generation
+#> smart_ore_generation:v1.4.0/signals/example/post_generation
 #
 # @example from SimplEnergy datapack
 # @author Stoupy51

@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.3.0/signals/example/generate_ores
+#> smart_ore_generation:v1.4.0/signals/example/generate_ores
 #
 # @example from SimplEnergy datapack
 # @author Stoupy51
@@ -22,8 +22,8 @@ execute if dimension minecraft:overworld run scoreboard players set #dimension s
 # Generate Simplunium Ore (x4) in the overworld only
 scoreboard players operation #min_height smart_ore_generation.data = _OVERWORLD_BOTTOM smart_ore_generation.data
 scoreboard players set #max_height smart_ore_generation.data 40
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.3.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.4.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.4.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.4.0/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.4.0/signals/example/simplunium_ore
 

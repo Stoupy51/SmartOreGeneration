@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.3.0/slots/random_position/apply_random
+#> smart_ore_generation:v1.4.0/slots/random_position/apply_random
 #
 # @input :
 #	- #min_height : min value for Y Pos
@@ -12,17 +12,18 @@
 
 ## Get random values
 # Get 2 random values (X & Z) between 0 and _REGION_SIZE (excluded)
-execute store result score #r_x smart_ore_generation.data run random value 0..
+execute store result score #r_x smart_ore_generation.data run random value 0..2147483646
 scoreboard players operation #r_x smart_ore_generation.data %= _REGION_SIZE_10 smart_ore_generation.data
 
-execute store result score #r_z smart_ore_generation.data run random value 0..
+execute store result score #r_z smart_ore_generation.data run random value 0..2147483646
 scoreboard players operation #r_z smart_ore_generation.data %= _REGION_SIZE_10 smart_ore_generation.data
 
 # Get 1 random value (Y) between #min_height and #max_height (excluded)
 scoreboard players operation #max smart_ore_generation.data = #max_height smart_ore_generation.data
 scoreboard players operation #max smart_ore_generation.data -= #min_height smart_ore_generation.data
 scoreboard players operation #max smart_ore_generation.data *= #10 smart_ore_generation.data
-execute store result score #r_y smart_ore_generation.data run random value 0..
+execute store result score #r_y smart_ore_generation.data run random value 0..2147483646
+execute if score #max smart_ore_generation.data matches 0.. run scoreboard players set #max smart_ore_generation.data 10
 scoreboard players operation #r_y smart_ore_generation.data %= #max smart_ore_generation.data
 
 

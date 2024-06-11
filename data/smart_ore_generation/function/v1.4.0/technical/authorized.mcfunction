@@ -16,5 +16,5 @@ execute store result entity @s Pos[2] double 1 run scoreboard players get #pos_z
 
 ## Check the regions
 execute store result storage smart_ore_generation:params region_size int 1 run scoreboard players get _REGION_SIZE smart_ore_generation.data
-execute at @s run function smart_ore_generation:v1.3.0/technical/check_regions with storage smart_ore_generation:params
+execute at @s run function smart_ore_generation:v1.4.0/technical/check_regions with storage smart_ore_generation:params
 

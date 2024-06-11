@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.3.0/signals/post_generation
+#> smart_ore_generation:v1.4.0/signals/post_generation
 #
 # @within			#smart_ore_generation:v1/signals/post_generation
 # @executed			as none at none (default of a /schedule)

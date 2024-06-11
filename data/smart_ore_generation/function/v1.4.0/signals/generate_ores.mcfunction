@@ -1,5 +1,5 @@
 
-#> smart_ore_generation:v1.3.0/signals/generate_ores
+#> smart_ore_generation:v1.4.0/signals/generate_ores
 #
 # @within			#smart_ore_generation:v1/signals/generate_ores
 # @executed			as a special marker & at a position you shouldn't care about
