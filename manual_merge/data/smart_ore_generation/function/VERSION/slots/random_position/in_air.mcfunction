@@ -1,7 +1,6 @@
 
 # Get random number between 0 and 1
-scoreboard players set #random NAMESPACE.data 0
-execute if predicate NAMESPACE:v1/chance/0.5 run scoreboard players add #random NAMESPACE.data 1
+execute store result score #random NAMESPACE.data run random value 0..1
 
 # Choose variation up or down
 execute if score #random NAMESPACE.data matches 0 run function NAMESPACE:VERSION/slots/random_position/variation_up

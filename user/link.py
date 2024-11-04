@@ -16,6 +16,7 @@ def main(config: dict) -> None:
 # Objectives initialization
 scoreboard objectives add {namespace}.data dummy
 scoreboard players set #10 {namespace}.data 10
+scoreboard players set #-1 {namespace}.data -1
 
 # Configuration initialization
 execute unless score #configured {namespace}.data matches 1 run function {namespace}:v{version}/configuration/setup

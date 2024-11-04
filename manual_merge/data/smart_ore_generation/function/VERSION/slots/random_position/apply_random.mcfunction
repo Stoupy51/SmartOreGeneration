@@ -22,10 +22,9 @@ scoreboard players operation #r_z NAMESPACE.data %= _REGION_SIZE_10 NAMESPACE.da
 scoreboard players operation #max NAMESPACE.data = #max_height NAMESPACE.data
 scoreboard players operation #max NAMESPACE.data -= #min_height NAMESPACE.data
 scoreboard players operation #max NAMESPACE.data *= #10 NAMESPACE.data
+execute if score #max NAMESPACE.data matches ..-1 run scoreboard players operation #max NAMESPACE.data *= #-1 NAMESPACE.data
 execute store result score #r_y NAMESPACE.data run random value 0..2147483646
-execute if score #max NAMESPACE.data matches 0.. run scoreboard players set #max NAMESPACE.data 10
 scoreboard players operation #r_y NAMESPACE.data %= #max NAMESPACE.data
-
 
 
 ## Apply offset to entity position
