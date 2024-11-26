@@ -1,42 +1,51 @@
 
-### Translations
+### 🌐 Translations
 * [English](https://github.com/Stoupy51/SmartOreGeneration/blob/main/README.md)
 * [Française](https://github.com/Stoupy51/SmartOreGeneration/blob/main/README.fr.md)
 
 
 # 📖 Smart Ore Generation
-Librairie Minecraft sous forme de data pack pour gérer la génération de minerais custom en utilisant un système intelligent pour la position des minerais.
-* Cette librairie est un complément au système de génération de minerai vanilla. Elle ne le remplace pas.
-* Elle a été conçue pour être compatible avec d'autres librairies de génération de minerai.
-* Cette librairie ne fournit qu'un moyen de générer des minerais de manière intelligente, elle ne fournit pas de fonctions de pour l'implémentation de custom blocks.
-* Vous pouvez configurer la librairie pour générer des minerais dans une dimension spécifique, ou dans toutes les dimensions.
-* Elle fonctionne avec une hauteur minimale personnalisée de l'overworld, un score constant est calculé pour l'overworld uniquement si besoin.
-* Cette librairie supporte les dimensions customs, mais vous devez les ajouter au function tag `denied_dimensions` pour les empêcher d'être scannées si vous ne voulez pas qu'elles le soient.
-* La librairie fonctionnera même si le monde a été généré avant l'installation de celle-ci car elle ne dépend pas de la génération du monde.
 
-Il s'agit d'une librairie intégrée que vous intégrez dans votre Datapack au lieu d'avoir à le télécharger séparément. Nécessite [LanternLoad](https://github.com/LanternMC/load) pour fonctionner.
+[![GitHub](https://img.shields.io/github/v/release/Stoupy51/SmartOreGeneration?logo=github&label=GitHub)](https://github.com/Stoupy51/SmartOreGeneration/releases/latest)
+[![Smithed](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.smithed.dev%2Fv2%2Fpacks%2Fsmart_ore_generation%2Fmeta&query=%24.stats.downloads.total&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDQgNCIgeG1sbnM6dj0iaHR0cHM6Ly92ZWN0YS5pby9uYW5vIj48cGF0aCBkPSJNLjczNy44NTlsLjg4Ny0uMjg1Yy4wOTktLjAzMi4yMDUtLjAzMi4zMDQgMGwxLjMzNS40MjktMS4wNC4zMzR6bS0uMTk1LjE4OXYuNDg3YzAgLjEwNS4wNjguMTk5LjE2OC4yMzFsMS41MTQuNDg3TDMuMjkgMS45MWMuMS0uMDMyLjE2OC0uMTI2LjE2OC0uMjMxdi0uNDg3bC0xLjIzNC4zOTF6bS44NTkgMS4xOWwuODIzLjI2LjQxMi0uMTI3di4zNzlsLS40MTIuMTMyLS44MjMtLjI2NHptLS40NDguNTA1di4yOTlsMS4yNzIuNDA4LjgyMy0uMjY0di0uM2wtLjgyMy4yNTl6IiBwYWludC1vcmRlcj0ic3Ryb2tlIGZpbGwgbWFya2VycyIgZmlsbD0iIzFiNDhjNCIvPjwvc3ZnPg%3D%3D&logoColor=224bbb&label=Smithed&labelColor=black&color=224bbb)](https://smithed.net/packs/smart_ore_generation)
+[![Modrinth](https://img.shields.io/modrinth/dt/smart_ore_generation?logo=modrinth&label=Modrinth)](https://modrinth.com/datapack/smart_ore_generation)
+[![Discord](https://img.shields.io/discord/1216400498488377467?label=Discord&logo=discord)](https://discord.gg/anxzu6rA9F)
+[![Python Datapack](https://img.shields.io/github/v/release/Stoupy51/python_datapack?logo=github&label=Python%20Datapack)](https://github.com/Stoupy51/PythonDatapackTemplate)
+
+🎮 Librairie Minecraft sous forme de data pack pour gérer la génération de minerais custom en utilisant un système intelligent pour la position des minerais.
+* 🔄 Cette librairie est un complément au système de génération de minerai vanilla. Elle ne le remplace pas.
+* 🤝 Elle a été conçue pour être compatible avec d'autres librairies de génération de minerai.
+* 💎 Cette librairie ne fournit qu'un moyen de générer des minerais de manière intelligente, elle ne fournit pas de fonctions de pour l'implémentation de custom blocks.
+* 🌍 Vous pouvez configurer la librairie pour générer des minerais dans une dimension spécifique, ou dans toutes les dimensions.
+* ⚡ Elle fonctionne avec une hauteur minimale personnalisée de l'overworld, un score constant est calculé pour l'overworld uniquement si besoin.
+* 🌐 Cette librairie supporte les dimensions customs, mais vous devez les ajouter au function tag `denied_dimensions` pour les empêcher d'être scannées si vous ne voulez pas qu'elles le soient.
+* ✨ La librairie fonctionnera même si le monde a été généré avant l'installation de celle-ci car elle ne dépend pas de la génération du monde.
+
+📦 Il s'agit d'une librairie intégrée que vous intégrez dans votre Datapack au lieu d'avoir à le télécharger séparément. Nécessite [LanternLoad](https://github.com/LanternMC/load) pour fonctionner.
 
 <br>
 
 # 📚 Explication du système
 Toutes les 5 secondes, la librairie exécute à l'emplacement de chaque joueur les étapes suivantes :
-* Exécuter le function tag `denied_dimensions` pour vous permettre de refuser que certaines dimensions soient scannées.
-* Si la dimension est autorisée, 8 régions autour des joueurs sont scannées. (La taille par défaut des régions est 96x96)
-* Pour chaque région, la librairie va vérifier si elle a déjà été scannée. Si non, elle lancera la génération de minerai pour cette région.
-* Ensuite, le function tag `generate_ores` est appelé à l'origine de la région (0, 0, 0).
-* Vous pouvez ajouter votre propre fonction de génération de minerai à ce function tag où vous générerez vos minerais en fonction de conditions que vous avez choisies. (comme les dimensions, les biomes, etc...)
-* Pour chaque filon de minerai que vous générez, vous devez utiliser le function tag de position aléatoire `random_position` pour obtenir une position aléatoire à l'intérieur de la région. Ce function tag déplacera la position vers une position aléatoire et au bloc d'air le plus proche. En procédant ainsi, vous éviterez que les minerais soient générés à l'intérieur des blocs et ne soient jamais trouvés par les joueurs (ce qui ajoutera du lag au serveur si le minerai utilise une entité). Ainsi, les minerais seront plus faciles à trouver.
-* Et après chaque vérification, la librairie sauvegardera la région comme "scannée" pour éviter qu'elle ne soit scannée à nouveau en ajoutant un `barrier block` à l'origine de la région.
-* Enfin, le fonction tag `post_generation` est appelé pour vous permettre de faire quelques tâches post-génération, comme lancer une fonction sur tous vos minerais nouvellement générés pour leur ajouter des tags nbt ou autre chose.
+* ⚡ Exécuter le function tag `denied_dimensions` pour vous permettre de refuser que certaines dimensions soient scannées.
+* 🌍 Si la dimension est autorisée, 8 régions autour des joueurs sont scannées. (La taille par défaut des régions est 96x96)
+* 🔍 Pour chaque région, la librairie va vérifier si elle a déjà été scannée. Si non, elle lancera la génération de minerai pour cette région.
+* 📍 Ensuite, le function tag `generate_ores` est appelé à l'origine de la région (0, 0, 0).
+* 💎 Vous pouvez ajouter votre propre fonction de génération de minerai à ce function tag où vous générerez vos minerais en fonction de conditions que vous avez choisies. (comme les dimensions, les biomes, etc...)
+* 🎲 Pour chaque filon de minerai que vous générez, vous devez utiliser le function tag de position aléatoire `random_position` pour obtenir une position aléatoire à l'intérieur de la région. Ce function tag déplacera la position vers une position aléatoire et au bloc d'air le plus proche. En procédant ainsi, vous éviterez que les minerais soient générés à l'intérieur des blocs et ne soient jamais trouvés par les joueurs (ce qui ajoutera du lag au serveur si le minerai utilise une entité). Ainsi, les minerais seront plus faciles à trouver.
+* 🚫 Et après chaque vérification, la librairie sauvegardera la région comme "scannée" pour éviter qu'elle ne soit scannée à nouveau en ajoutant un `barrier block` à l'origine de la région.
+* ✨ Enfin, le fonction tag `post_generation` est appelé pour vous permettre de faire quelques tâches post-génération, comme lancer une fonction sur tous vos minerais nouvellement générés pour leur ajouter des tags nbt ou autre chose.
 
 <br>
 
 # 🔧 Function Tag
+
 ## 📥 <ins>Signals</ins>
+
 ### `#smart_ore_generation:v1/denied_dimensions`
-* Ce function tag est appelé lorsque la librairie veut scanner une région. Vous pouvez ajouter quelles dimensions que vous voulez empêcher d'être scannées en ajoutant une fonction à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/denied_dimensions.json`.
-* Reportez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/denied_dimensions.mcfunction).
+* 🔍 Ce function tag est appelé lorsque la librairie veut scanner une région. Vous pouvez ajouter quelles dimensions que vous voulez empêcher d'être scannées en ajoutant une fonction à ce tag.
+* 📝 Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/denied_dimensions.json`.
+* 📖 Reportez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/denied_dimensions.mcfunction).
 ```mcfunction
 #> smart_ore_generation:v1.5.0/signals/denied_dimensions
 #
@@ -54,10 +63,11 @@ execute if score #authorized smart_ore_generation.data matches 1 if predicate si
 ## Autre exemple :
 execute if score #authorized smart_ore_generation.data matches 1 if dimension minecraft:overworld run scoreboard players set #authorized smart_ore_generation.data 0
 ```
+
 ### `#smart_ore_generation:v1/generate_ores`
-* Ce function tag est appelé lorsque la librairie veut générer des minerais dans une région. Vous pouvez ajouter votre propre fonction de génération de minerai à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/generate_ores.json`.
-* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/generate_ores.mcfunction)
+* 🔍 Ce function tag est appelé lorsque la librairie veut générer des minerais dans une région. Vous pouvez ajouter votre propre fonction de génération de minerai à ce tag.
+* 📝 Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/generate_ores.json`.
+* 📖 Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/generate_ores.mcfunction)
 ```mcfunction
 #> smart_ore_generation:v1.5.0/signals/generate_ores
 #
@@ -85,10 +95,11 @@ execute if score #dimension smart_ore_generation.data matches 0 run function sma
 execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.5.0/signals/example/simplunium_ore
 # Voir le modèle dans le lien pour le contenu de la fonction smart_ore_generation:v1.5.0/signals/example/simplunium_ore.mcfunction
 ```
+
 ### `#smart_ore_generation:v1/post_generation`
-* Ce function tag est appelé lorsque la librairie a fini de générer des minerais dans les régions. Vous pouvez ajouter votre propre fonction de post-génération à ce tag.
-* Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/post_generation.json`.
-* Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/post_generation.mcfunction)
+* 🔍 Ce function tag est appelé lorsque la librairie a fini de générer des minerais dans les régions. Vous pouvez ajouter votre propre fonction de post-génération à ce tag.
+* 📝 Pour utiliser ce signal, vous devez ajouter une fonction à la liste de tags située dans `data/smart_ore_generation/tags/function/v1/signals/post_generation.json`.
+* 📖 Référez-vous à ce modèle pour le contenu de la fonction [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/post_generation.mcfunction)
 ```mcfunction
 #> smart_ore_generation:v1.5.0/signals/post_generation
 #
@@ -115,10 +126,12 @@ execute if score #generated_ore simplenergy.data matches 1 run scoreboard player
 execute if score #generated_deepslate_ore simplenergy.data matches 1 as @e[tag=simplenergy.new_deepslate_simplunium_ore] at @s run function simplenergy:place/deepslate_simplunium_ore/secondary
 execute if score #generated_deepslate_ore simplenergy.data matches 1 run scoreboard players reset #generated_deepslate_ore simplenergy.data
 ```
+
 ## 📤 <ins>Slots</ins>
+
 ### `#smart_ore_generation:v1/slots/random_position`
-* Ce function tag doit être appelé lorsque vous avez besoin d'une position aléatoire dans la région.
-* Pour utiliser correctement ce slot, voir le modèle [ici].(https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/simplunium_ore.mcfunction)
+* 🎲 Ce function tag doit être appelé lorsque vous avez besoin d'une position aléatoire dans la région.
+* 📖 Pour utiliser correctement ce slot, voir le modèle [ici](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.5.0/signals/example/simplunium_ore.mcfunction)
 ```mcfunction
 #> smart_ore_generation:v1.5.0/signals/example/simplunium_ore
 #
@@ -142,17 +155,4 @@ execute at @s positioned ~0.8 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simpluni
 execute at @s positioned ~0.8 ~0.0 ~0.8 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
 execute at @s positioned ~0.0 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simplunium_ore run function simplenergy:calls/smart_ore_generation/simplunium_type
 ```
-
-<br>
-
-## Comment l'utiliser ?
-1. Utilisez un datapack merger : [Mitochrondria Online](https://mito.thenuclearnexus.live/)
-2. Implémentez l'API comme décrit ci-dessus.
-
-OU
-
-1. Installez [LanternLoad](https://github.com/LanternMC/load) dans votre data pack
-2. Copiez le dossier `data/smart_ore_generation` dans votre data pack
-3. Fusionnez le contenu de `SmartOreGeneration/data/load/tags/function/load.json` et votre `data/load/tags/function/load.json`
-4. Implémentez l'API comme décrit ci-dessus.
 
