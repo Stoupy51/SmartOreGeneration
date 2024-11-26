@@ -4,7 +4,7 @@
 # @within	smart_ore_generation:v1.6.0/load/main
 #
 
-# Smart Ore Generation
+# SmartOreGeneration
 scoreboard objectives add smart_ore_generation.data dummy
 tag Stoupy51 add convention.debug
 

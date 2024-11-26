@@ -4,7 +4,7 @@
 # @within	smart_ore_generation:v1.6.0/load/secondary
 #
 
-tellraw @a[tag=convention.debug] {"text":"[Loaded Smart Ore Generation v1.6.0]","color":"green"}
+tellraw @a[tag=convention.debug] {"text":"[Loaded SmartOreGeneration v1.6.0]","color":"green"}
 
 scoreboard players set #smart_ore_generation.loaded load.status 1
 
