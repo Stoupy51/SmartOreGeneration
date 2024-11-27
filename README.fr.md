@@ -23,6 +23,9 @@
 
 📦 Il s'agit d'une librairie intégrée que vous intégrez dans votre Datapack au lieu d'avoir à le télécharger séparément. Nécessite [LanternLoad](https://github.com/LanternMC/load) pour fonctionner.
 
+🔍 Vous pouvez voir sur cette image comment les filons de minerai sont **toujours adjacents à des blocs d'air**.
+![image](https://cdn.modrinth.com/data/zpEM3sbc/images/51080a8f811cdd114653fd983c520fa1e210efb8.png)
+
 <br>
 
 # 📚 Explication du système

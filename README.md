@@ -23,6 +23,9 @@
 
 📦 This is an embedded library, so you package it inside your datapack as opposed to having a separate download. Requires [LanternLoad](https://github.com/LanternMC/load) to operate.
 
+🔍 You can see on this image how ore patches are **always adjacent to air** blocks.
+![image](https://cdn.modrinth.com/data/zpEM3sbc/images/51080a8f811cdd114653fd983c520fa1e210efb8.png)
+
 <br>
 
 # 📚 System explanation
