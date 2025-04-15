@@ -12,7 +12,7 @@ def main(config: dict) -> None:
 	major, minor, patch = version.split(".")
 
 	# Write additional confirm load things
-	write_to_load_file(config, f"""
+	write_load_file(config, f"""
 # Objectives initialization
 scoreboard objectives add {namespace}.data dummy
 scoreboard players set #10 {namespace}.data 10
@@ -27,7 +27,7 @@ schedule function {namespace}:v{version}/configuration/world_bottom_start 5s
 """)
 	
 	# Write second_5 function
-	write_to_versioned_file(config, "second_5", f"""
+	write_versioned_file(config, "second_5", f"""
 ## Execute on players
 execute at @a run function {namespace}:v{version}/technical/player
 execute if score #generated {namespace}.data matches 1 run function {namespace}:v{version}/technical/post_generation
@@ -39,7 +39,7 @@ scoreboard players set #generated {namespace}.data 0
 """)
 	
 	# Random position slot
-	write_to_versioned_file(config, "slots/random_position", f"""
+	write_versioned_file(config, "slots/random_position", f"""
 # Launch the function if is the right version
 execute if score #{namespace}.major load.status matches {major} if score #{namespace}.minor load.status matches {minor} if score #{namespace}.patch load.status matches {patch} run function {namespace}:v{version}/slots/random_position/launch
 """)
@@ -54,6 +54,6 @@ execute if score #{namespace}.major load.status matches {major} if score #{names
 				content: str = f.read()
 				content = content.replace("NAMESPACE", namespace)
 				content = content.replace("VERSION", f"v{version}")
-				write_to_file(dst, content)
+				write_file(dst, content)
 	pass
 
