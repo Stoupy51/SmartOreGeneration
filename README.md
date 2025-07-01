@@ -49,9 +49,9 @@ Every 5 seconds, the library run at the location of every player the following s
 ### `#smart_ore_generation:v1/denied_dimensions`
 * 🔍 This function tag is called when the library want to scan a region. You can add which dimension you want to deny from being scanned by adding a function to this tag.
 * 📝 To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/function/v1/signals/denied_dimensions.json`.
-* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.1/signals/denied_dimensions.mcfunction).
+* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.2/signals/denied_dimensions.mcfunction).
 ```mcfunction
-#> smart_ore_generation:v1.7.1/signals/denied_dimensions
+#> smart_ore_generation:v1.7.2/signals/denied_dimensions
 #
 # @within			#smart_ore_generation:v1/signals/denied_dimensions
 # @executed			as & at the player who triggered the event
@@ -71,9 +71,9 @@ execute if score #authorized smart_ore_generation.data matches 1 if dimension mi
 ### `#smart_ore_generation:v1/generate_ores`
 * 🔍 This function tag is called when the library want to generate ores in a region. You can add your own ore generation function to this tag.
 * 📝 To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/function/v1/signals/generate_ores.json`.
-* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.1/signals/example/generate_ores.mcfunction)
+* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.2/signals/example/generate_ores.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.7.1/signals/generate_ores
+#> smart_ore_generation:v1.7.2/signals/generate_ores
 #
 # @within			#smart_ore_generation:v1/signals/generate_ores
 # @executed			as a special marker & at a position you shouldn't care about
@@ -93,19 +93,19 @@ execute if predicate simplenergy:in_overworld run scoreboard players set #dimens
 # Generate Simplunium Ore (x4) in the overworld only
 scoreboard players operation #min_height smart_ore_generation.data = _OVERWORLD_BOTTOM smart_ore_generation.data
 scoreboard players set #max_height smart_ore_generation.data 40
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.1/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.1/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.1/signals/example/simplunium_ore
-execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.1/signals/example/simplunium_ore
-# See the template in the link for the content of the function smart_ore_generation:v1.7.1/signals/example/simplunium_ore.mcfunction
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.2/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.2/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.2/signals/example/simplunium_ore
+execute if score #dimension smart_ore_generation.data matches 0 run function smart_ore_generation:v1.7.2/signals/example/simplunium_ore
+# See the template in the link for the content of the function smart_ore_generation:v1.7.2/signals/example/simplunium_ore.mcfunction
 ```
 
 ### `#smart_ore_generation:v1/post_generation`
 * 🔄 This function tag is called when the library has finished generating ores in regions. You can add your own post-generation function to this tag.
 * 📝 To use this signal, you must add a function to the tag list located in `data/smart_ore_generation/tags/function/v1/signals/post_generation.json`.
-* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.1/signals/example/post_generation.mcfunction)
+* 📖 Refer to this template for the content of the function [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.2/signals/example/post_generation.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.7.1/signals/post_generation
+#> smart_ore_generation:v1.7.2/signals/post_generation
 #
 # @within			#smart_ore_generation:v1/signals/post_generation
 # @executed			as none at none (default of a /schedule)
@@ -134,9 +134,9 @@ execute if score #generated_deepslate_ore simplenergy.data matches 1 run scorebo
 ## 📤 <ins>Slots</ins>
 ### `#smart_ore_generation:v1/slots/random_position`
 * This function tag should be called when you need a random position in the region.
-* To use properly this slot, see the template [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.1/signals/example/simplunium_ore.mcfunction)
+* To use properly this slot, see the template [here](https://github.com/Stoupy51/SmartOreGeneration/blob/main/build/datapack/data/smart_ore_generation/function/v1.7.2/signals/example/simplunium_ore.mcfunction)
 ```mcfunction
-#> smart_ore_generation:v1.7.1/signals/example/simplunium_ore
+#> smart_ore_generation:v1.7.2/signals/example/simplunium_ore
 #
 # @example from SimplEnergy datapack
 # Always launch the random position function tag before anything else
