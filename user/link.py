@@ -1,59 +1,42 @@
 
+# ruff: noqa: E501
 # Imports
-from python_datapack.constants import *
-from python_datapack.utils.print import *
-from python_datapack.utils.io import *
-from config import *
+from stewbeet import BlockTag, Context, set_json_encoder, write_load_file, write_versioned_function
+
 
 # Main function is run just before making finalyzing the build process (zip, headers, lang, ...)
-def main(config: dict) -> None:
-	namespace: str = config["namespace"]
-	version: str = config["version"]
-	major, minor, patch = version.split(".")
+def beet_default(ctx: Context) -> None:
+	ns: str = ctx.project_id
+	version: str = ctx.project_version
 
 	# Write additional confirm load things
-	write_load_file(config, f"""
+	write_load_file(f"""
 # Objectives initialization
-scoreboard objectives add {namespace}.data dummy
-scoreboard players set #10 {namespace}.data 10
-scoreboard players set #-1 {namespace}.data -1
+scoreboard objectives add {ns}.data dummy
+scoreboard players set #10 {ns}.data 10
+scoreboard players set #-1 {ns}.data -1
 
 # Configuration initialization
-execute unless score #configured {namespace}.data matches 1 run function {namespace}:v{version}/configuration/setup
+execute unless score #configured {ns}.data matches 1 run function {ns}:v{version}/configuration/setup
 
 # Forceload a region in overworld for a marker
 execute in minecraft:overworld run forceload add 0 0
-schedule function {namespace}:v{version}/configuration/world_bottom_start 5s
+schedule function {ns}:v{version}/configuration/world_bottom_start 5s
 """)
-	
+
 	# Write second_5 function
-	write_versioned_file(config, "second_5", f"""
+	write_versioned_function("second_5", f"""
 ## Execute on players
-execute at @a run function {namespace}:v{version}/technical/player
-execute if score #generated {namespace}.data matches 1 run function {namespace}:v{version}/technical/post_generation
-scoreboard players set #generated {namespace}.data 0
+execute at @a run function {ns}:v{version}/technical/player
+execute if score #generated {ns}.data matches 1 run function {ns}:v{version}/technical/post_generation
+scoreboard players set #generated {ns}.data 0
 
 
 ## Performance profiling
-# execute as @e[limit=64] at @s run function {namespace}:v{version}/technical/generate/start
+# execute as @e[limit=64] at @s run function {ns}:v{version}/technical/generate/start
 """)
-	
-	# Random position slot
-	write_versioned_file(config, "slots/random_position", f"""
-# Launch the function if is the right version
-execute if score #{namespace}.major load.status matches {major} if score #{namespace}.minor load.status matches {minor} if score #{namespace}.patch load.status matches {patch} run function {namespace}:v{version}/slots/random_position/launch
-""")
-	
-	# Copy every file in the manual_merge folder
-	MANUAL_MERGE_FOLDER: str = f"{ROOT}/manual_merge"
-	for root, _, files in os.walk(MANUAL_MERGE_FOLDER):
-		for file in files:
-			src: str = f"{root}/{file}"
-			dst: str = src.replace(MANUAL_MERGE_FOLDER, f"{config['build_datapack']}").replace("VERSION", f"v{version}")
-			with super_open(src, "r") as f:
-				content: str = f.read()
-				content = content.replace("NAMESPACE", namespace)
-				content = content.replace("VERSION", f"v{version}")
-				write_file(dst, content)
-	pass
+
+	# Write the block tags
+	air_blocks: list[str] = ["air","cave_air","void_air","structure_void","water","lava","glow_lichen"]
+	ctx.data[ns].block_tags["air"] = set_json_encoder(BlockTag({"values":[f"minecraft:{x}" for x in air_blocks]}))
 

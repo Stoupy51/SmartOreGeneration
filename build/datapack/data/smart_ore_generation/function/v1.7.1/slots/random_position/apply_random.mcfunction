@@ -3,17 +3,14 @@
 #
 # @within	smart_ore_generation:v1.7.1/slots/random_position/try
 #
-
-#> smart_ore_generation:v1.7.1/slots/random_position/apply_random
-#
 # @input :
-#	- #min_height : min value for Y Pos
-#	- #max_height : max value for Y Pos
+# - #min_height : min value for Y Pos
+# - #max_height : max value for Y Pos
 # @output :
-#	- Nothing but update entity position
-#
+# - Nothing but update entity position
+# 
 # Apply a random offset to entity position in the region defined by #min_height, #max_height, and _REGION_SIZE
-
+#
 
 ## Get random values
 # Get 2 random values (X & Z) between 0 and _REGION_SIZE (excluded)
@@ -30,7 +27,6 @@ scoreboard players operation #max smart_ore_generation.data *= #10 smart_ore_gen
 execute if score #max smart_ore_generation.data matches ..-1 run scoreboard players operation #max smart_ore_generation.data *= #-1 smart_ore_generation.data
 execute store result score #r_y smart_ore_generation.data run random value 0..2147483646
 scoreboard players operation #r_y smart_ore_generation.data %= #max smart_ore_generation.data
-
 
 ## Apply offset to entity position
 data modify storage smart_ore_generation:main Pos set value [0.0d, 0.0d, 0.0d]
@@ -51,8 +47,6 @@ execute store result storage smart_ore_generation:main Pos[0] double 0.1 run sco
 execute store result storage smart_ore_generation:main Pos[1] double 0.1 run scoreboard players get #new_y smart_ore_generation.data
 execute store result storage smart_ore_generation:main Pos[2] double 0.1 run scoreboard players get #new_z smart_ore_generation.data
 data modify entity @s Pos set from storage smart_ore_generation:main Pos
-
-
 
 ## Debug
 execute if score _DEBUG_LEVEL smart_ore_generation.data matches 2.. run tellraw @a [{"text":" Random position: (","color":"gold"},{"nbt":"Pos[0]","storage":"smart_ore_generation:main","color":"yellow"},{"text":", "},{"nbt":"Pos[1]","storage":"smart_ore_generation:main","color":"yellow"},{"text":", "},{"nbt":"Pos[2]","storage":"smart_ore_generation:main","color":"yellow"},{"text":")"}]

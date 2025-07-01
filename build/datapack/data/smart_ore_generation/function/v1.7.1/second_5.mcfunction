@@ -12,7 +12,6 @@ execute at @a run function smart_ore_generation:v1.7.1/technical/player
 execute if score #generated smart_ore_generation.data matches 1 run function smart_ore_generation:v1.7.1/technical/post_generation
 scoreboard players set #generated smart_ore_generation.data 0
 
-
 ## Performance profiling
 # execute as @e[limit=64] at @s run function smart_ore_generation:v1.7.1/technical/generate/start
 

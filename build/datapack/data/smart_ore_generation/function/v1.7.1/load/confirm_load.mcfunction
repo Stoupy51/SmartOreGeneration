@@ -4,8 +4,8 @@
 # @within	smart_ore_generation:v1.7.1/load/secondary
 #
 
+# Confirm load
 tellraw @a[tag=convention.debug] {"text":"[Loaded SmartOreGeneration v1.7.1]","color":"green"}
-
 scoreboard players set #smart_ore_generation.loaded load.status 1
 
 # Objectives initialization
