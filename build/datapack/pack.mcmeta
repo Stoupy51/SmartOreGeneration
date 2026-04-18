@@ -1,7 +1,16 @@
 {
 	"pack": {
 		"pack_format": 81,
-		"description": "SmartOreGeneration [1.7.2] by Stoupy51"
+		"description": "SmartOreGeneration [1.7.3] by Stoupy51",
+		"supported_formats": [
+			81,
+			9999
+		],
+		"min_format": 81,
+		"max_format": [
+			9999,
+			0
+		]
 	},
 	"id": "smart_ore_generation"
 }
