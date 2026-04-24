@@ -160,11 +160,5 @@ execute at @s positioned ~0.0 ~0.8 ~0.0 if block ~ ~ ~ #simplenergy:for_simpluni
 
 ## ⭐ Star History
 
-<a href="https://star-history.com/#Stoupy51/SmartOreGeneration&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Stoupy51/SmartOreGeneration&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Stoupy51/SmartOreGeneration&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Stoupy51/SmartOreGeneration&type=Date" />
- </picture>
-</a>
+[![Star History Chart](https://api.star-history.com/chart?repos=Stoupy51/SmartOreGeneration&type=date&legend=top-left)](https://www.star-history.com/?repos=Stoupy51%2FSmartOreGeneration&type=date&legend=top-left)
 
