@@ -28,7 +28,7 @@ modrinth_config: JsonDict = {
 	"project_name": cfg.name,
 	"version": cfg.version,
 	"authors": cfg.author,
-	"summary": "A Minecraft data pack library for handling custom ore generation by using a smart system for ore location.",
+	"summary": "A Minecraft datapack library for handling custom ore generation by using a smart system for ore location.",
 	"description_markdown": read_file(f"{cfg.directory}/README.md"),
 	"version_type": "release",
 	"build_folder": cfg.output,
