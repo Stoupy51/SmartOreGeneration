@@ -56,9 +56,9 @@ $execute positioned ~ 0 ~$(region_size) if loaded ~ ~ ~ if predicate {ns}:v1/is_
 $execute positioned ~$(region_size) 0 ~$(region_size) if loaded ~ ~ ~ if predicate {ns}:v1/is_region_non_generated run function {ns}:v{version}/technical/generate/start
 """)
 	ctx.data[ns].predicates["v1/is_region_non_generated"] = set_json_encoder(Predicate({
-		"condition": "minecraft:inverted",
+		"type": "minecraft:inverted",
 		"term": {
-			"condition": "minecraft:location_check",
+			"type": "minecraft:location_check",
 			"predicate": {
 				"block": {
 					"blocks": [
